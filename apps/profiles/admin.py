@@ -1,8 +1,8 @@
 # Register your models here.
 from django.contrib import admin
-from django.contrib.auth.models import Group
 
 from apps.profiles.models import Profile
+
 
 @admin.register(Profile)
 class ProfileAdmin(admin.ModelAdmin):

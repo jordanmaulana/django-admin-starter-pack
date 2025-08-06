@@ -50,8 +50,6 @@
         <tr class="hover:bg-gray-50">
           <td class="px-6 py-4 border-b border-gray-200 text-gray-900">{{ data.actor.email }}</td>
           <td class="px-6 py-4 border-b border-gray-200 text-gray-900">{{ data.name }}</td>
-          <td class="px-6 py-4 border-b border-gray-200 text-gray-900">{{ data.phone_number }}</td>
-          <td class="px-6 py-4 border-b border-gray-200 text-gray-900">{{ data.address|default_if_none:"-" }}</td>
           <td class="px-6 py-4 border-b border-gray-200 text-gray-900">{{ data.created_on }}</td>
           <td class="px-6 py-4 border-b border-gray-200">
             <a href="{% url 'user_detail' data.uid %}"

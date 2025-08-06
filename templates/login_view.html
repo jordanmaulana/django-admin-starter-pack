@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>RoofCalc Admin</title>
+    <title>Django Admin</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="{% static 'output.css' %}" />
     {% block head %}{% endblock %}
@@ -10,7 +10,7 @@
   <body>
     <main class="flex h-screen overflow-hidden bg-soft">
       <div class="bg-white p-8 rounded-lg shadow-md w-full max-w-md h-min m-auto my-auto">
-        <h2 class="text-2xl font-semibold text-center mb-6">RoofCalc Admin Login</h2>
+        <h2 class="text-2xl font-semibold text-center mb-6">Django Admin Login</h2>
         {% if form.errors %}
           <div class="bg-red-100 text-red-700 p-4 rounded mb-4">Your username and password didn't match. Please try again.</div>
         {% endif %}

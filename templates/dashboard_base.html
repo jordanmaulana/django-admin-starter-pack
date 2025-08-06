@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <title>
       {% block title %}
-        RoofCalc Admin
+        Django Admin
       {% endblock title %}
     </title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -15,22 +15,14 @@
   <body class="bg-gray-100 text-gray-900">
     <main class="flex h-screen overflow-hidden">
       <!-- Sidebar -->
-      <aside class="w-[230px] bg-soft text-white flex-shrink-0 p-4 flex flex-col justify-between">
+      <aside class="w-[230px] bg-blue-500 text-white flex-shrink-0 p-4 flex flex-col justify-between">
         <div class="flex flex-col">
-          <h1 class="text-xl font-bold mb-6">RoofCalc Admin</h1>
+          <h1 class="text-xl font-bold mb-6">Django Admin</h1>
           <nav class="space-y-2">
             <a href="{% url 'dashboard' %}"
                class="block px-3 py-2 rounded hover:bg-blue-700 transition">Dashboard</a>
-            <a href="{% url 'calculation_list' %}"
-               class="block px-3 py-2 rounded hover:bg-blue-700 transition">Perhitungan</a>
             <a href="{% url 'user_list' %}"
                class="block px-3 py-2 rounded hover:bg-blue-700 transition">Pengguna</a>
-            <a href="{% url 'brand_list' %}"
-               class="block px-3 py-2 rounded hover:bg-blue-700 transition">Brand</a>
-            <a href="{% url 'product_list' %}"
-               class="block px-3 py-2 rounded hover:bg-blue-700 transition">Produk</a>
-            <a href="{% url 'settings' %}"
-               class="block px-3 py-2 rounded hover:bg-blue-700 transition">Pengaturan</a>
           </nav>
         </div>
         <div class="gap-4">
@@ -41,7 +33,7 @@
               Logout
             </button>
           </form>
-          <div class="text-center mt-2 text-xs text-white">Version: 1.0.3</div>
+          <div class="text-center mt-2 text-xs text-white">Version: 1.0.0</div>
         </div>
       </aside>
       <!-- Content Area -->
