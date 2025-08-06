@@ -5,20 +5,20 @@
       <input type="text"
              name="q"
              value="{{ query }}"
-             placeholder="Cari nama pengguna.."
+             placeholder="Search username.."
              class="border border-gray-300 px-4 py-2 rounded w-96" />
       <select name="sort" class="border border-gray-300 px-4 py-2 rounded">
-        <option value="">Urutkan</option>
-        <option value="newest" {% if sort == "newest" %}selected{% endif %}>Terbaru</option>
-        <option value="oldest" {% if sort == "oldest" %}selected{% endif %}>Terlama</option>
+        <option value="">Sort by</option>
+        <option value="newest" {% if sort == "newest" %}selected{% endif %}>Newest</option>
+        <option value="oldest" {% if sort == "oldest" %}selected{% endif %}>Oldest</option>
         <option value="email_asc" {% if sort == "email_asc" %}selected{% endif %}>Email A-Z</option>
         <option value="email_desc" {% if sort == "email_desc" %}selected{% endif %}>Email Z-A</option>
-        <option value="name_asc" {% if sort == "name_asc" %}selected{% endif %}>Nama A-Z</option>
-        <option value="name_desc" {% if sort == "name_desc" %}selected{% endif %}>Nama Z-A</option>
+        <option value="name_asc" {% if sort == "name_asc" %}selected{% endif %}>Name A-Z</option>
+        <option value="name_desc" {% if sort == "name_desc" %}selected{% endif %}>Name Z-A</option>
       </select>
       <button type="submit"
               class="ml-2 bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 hover:cursor-pointer">
-        Cari
+        Search
       </button>
     </form>
   </div>
@@ -29,19 +29,13 @@
           Email
         </th>
         <th class="px-6 py-3 border-b border-gray-200 text-left text-xs font-medium text-gray-700 uppercase bg-gray-100">
-          Nama
+          Name
         </th>
         <th class="px-6 py-3 border-b border-gray-200 text-left text-xs font-medium text-gray-700 uppercase bg-gray-100">
-          Nomor Telepon
+          Registration Date
         </th>
         <th class="px-6 py-3 border-b border-gray-200 text-left text-xs font-medium text-gray-700 uppercase bg-gray-100">
-          Alamat
-        </th>
-        <th class="px-6 py-3 border-b border-gray-200 text-left text-xs font-medium text-gray-700 uppercase bg-gray-100">
-          Tanggal Registrasi
-        </th>
-        <th class="px-6 py-3 border-b border-gray-200 text-left text-xs font-medium text-gray-700 uppercase bg-gray-100">
-          Tindakan
+          Action
         </th>
       </tr>
     </thead>
@@ -53,7 +47,7 @@
           <td class="px-6 py-4 border-b border-gray-200 text-gray-900">{{ data.created_on }}</td>
           <td class="px-6 py-4 border-b border-gray-200">
             <a href="{% url 'user_detail' data.uid %}"
-               class="text-blue-600 hover:underline">Lihat Detail</a>
+               class="text-blue-600 hover:underline">View Details</a>
           </td>
         </tr>
       {% empty %}
