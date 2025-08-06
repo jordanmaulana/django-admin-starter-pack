@@ -1,10 +1,10 @@
 from django.contrib.auth import authenticate
 from django.contrib.auth.models import User
 from django.contrib.auth.tokens import default_token_generator
-from django.core.mail import send_mail, EmailMultiAlternatives
+from django.core.mail import send_mail
 from django.template.loader import render_to_string
 from django.utils.encoding import force_bytes
-from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
+from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
 from drf_yasg.utils import swagger_auto_schema
 from rest_framework import status, viewsets
 from rest_framework.authtoken.models import Token
@@ -92,7 +92,11 @@ class AuthAPI(viewsets.ViewSet):
         request_body=PasswordResetSerializer,
         responses={200: "Reset kata sandi berhasil"},
     )
-    @action(detail=False, methods=["post"], url_path="reset-password/(?P<uidb64>[^/.]+)/(?P<token>[^/.]+)")
+    @action(
+        detail=False,
+        methods=["post"],
+        url_path="reset-password/(?P<uidb64>[^/.]+)/(?P<token>[^/.]+)",
+    )
     def reset_password(self, request, uidb64, token):
         try:
             uid = urlsafe_base64_decode(uidb64).decode()

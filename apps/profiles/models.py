@@ -1,5 +1,4 @@
 # Create your models here.
-import datetime
 import uuid
 
 from django.db import models

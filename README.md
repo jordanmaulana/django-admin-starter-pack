@@ -23,6 +23,13 @@ pip install -r requiremnets.txt
 source ./bin/install-tailwind.sh
 ```
 
+## How to run
+
+```bash
+npm run tw
+./manage.py runserver
+```
+
 ## URL
 
 Admin panel

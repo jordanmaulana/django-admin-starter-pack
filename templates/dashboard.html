@@ -1,0 +1,205 @@
+{% extends "dashboard_base.html" %}
+{% load humanize %}
+{% load format_number %}
+{% block head %}<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>{% endblock %}
+{% block content %}
+  <main class="space-y-8">
+    <section class="grid grid-cols-4 gap-4">
+      <div class="p-4 rounded-lg border shadow-sm space-y-2">
+        <p>Total User</p>
+        <p class="text-3xl font-bold">
+          {{ user_count|intdot }} <span class="text-sm text-slate-500">user</span>
+        </p>
+        <p class="text-slate-400">{{ users_registered_today|intdot }} user teregistrasi hari ini</p>
+      </div>
+      <div class="p-4 rounded-lg border shadow-sm space-y-2">
+        <p>Total Perhitungan</p>
+        <p class="text-3xl font-bold">
+          {{ calculation_count|intdot }} <span class="text-sm text-slate-500">data</span>
+        </p>
+        <p class="text-slate-400">Total perhitungan senilai {{ calculation_total|idr }}</p>
+      </div>
+      <div class="p-4 rounded-lg border shadow-sm space-y-2">
+        <p>Total Produk</p>
+        <p class="text-3xl font-bold">
+          {{ product_count }} <span class="text-sm text-slate-500">produk</span>
+        </p>
+      </div>
+      <div class="p-4 rounded-lg border shadow-sm space-y-2">
+        <p>Total Produk Digunakan</p>
+        <p class="text-3xl font-bold">
+          {{ total_items_used|intdot }} <span class="text-sm text-slate-500">kali</span>
+        </p>
+        <p class="text-slate-400">Akumulasi dari semua kalkulasi</p>
+      </div>
+    </section>
+    <section class="grid grid-cols-2 gap-4">
+      <div class="bg-white p-4 rounded-lg shadow-sm items-center flex flex-col">
+        <p class="text-lg font-semibold mb-2">Perhitungan 1 bulan terakhir</p>
+        <div class="max-h-96 overflow-hidden w-full">
+          <canvas id="calculationChart" />
+        </div>
+      </div>
+      <div class="bg-white p-4 rounded-lg shadow-sm items-center flex flex-col">
+        <h3 class="text-lg font-semibold mb-2">Distribusi Perhitungan Bentuk Atap</h3>
+        <div class="max-h-96 overflow-hidden w-full flex items-center justify-center">
+          <canvas id="shapeChart" />
+        </div>
+      </div>
+      <div class="bg-white p-4 rounded-lg shadow-sm items-center flex flex-col">
+        <h3 class="text-lg font-semibold mb-2">Produk Paling Banyak Digunakan</h3>
+        <div class="max-h-96 overflow-hidden w-full flex items-center justify-center">
+          <canvas id="topProductChart" />
+        </div>
+      </div>
+      <div class="bg-white p-4 rounded-lg shadow-sm items-center flex flex-col">
+        <h3 class="text-lg font-semibold mb-2">Produk dengan Nilai Tertinggi</h3>
+        <div class="max-h-96 overflow-hidden w-full flex items-center justify-center">
+          <canvas id="topProductValueChart" />
+        </div>
+      </div>
+    </section>
+  </main>
+  <script>
+  const ctx = document.getElementById("calculationChart").getContext("2d");
+  const chart = new Chart(ctx, {
+    type: "line",
+    data: {
+      labels: {{ chart_labels|safe }},
+      datasets: [{
+        label: "Total Kalkulasi (Rp)",
+        data: {{ chart_data|safe }},
+        borderColor: "rgba(75, 192, 192, 1)",
+        backgroundColor: "rgba(75, 192, 192, 0.2)",
+        borderWidth: 2,
+        fill: true,
+        tension: 0.3
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          callbacks: {
+            label: function(context) {
+              let value = context.parsed.y;
+              return 'Rp ' + value.toLocaleString('id-ID');
+            }
+          }
+        }
+      },
+      scales: {
+        y: {
+          beginAtZero: true,
+          ticks: {
+            callback: function(value) {
+              return 'Rp ' + value.toLocaleString('id-ID');
+            }
+          }
+        }
+      }
+    }
+  });
+  </script>
+  <script>
+  const shapeCtx = document.getElementById("shapeChart").getContext("2d");
+  new Chart(shapeCtx, {
+    type: "pie",
+    data: {
+      labels: {{ chart_shape_labels|safe }},
+      datasets: [{
+        data: {{ chart_shape_data|safe }},
+        backgroundColor: [
+          "#60a5fa", "#f87171", "#34d399", "#fbbf24", "#a78bfa", "#f472b6"
+        ],
+        borderWidth: 1
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: {
+          position: "bottom"
+        }
+      }
+    }
+  });
+  </script>
+  <script>
+  const topProductCtx = document.getElementById("topProductChart").getContext("2d");
+  new Chart(topProductCtx, {
+    type: "bar",
+    data: {
+      labels: {{ top_product_labels|safe }},
+      datasets: [{
+        label: "Total Digunakan (Qty)",
+        data: {{ top_product_data|safe }},
+        backgroundColor: "#60a5fa",
+        borderRadius: 8,
+        barThickness: 32
+      }]
+    },
+    options: {
+      responsive: true,
+      indexAxis: 'y',
+      scales: {
+        x: {
+          beginAtZero: true,
+          ticks: {
+            precision: 0,
+            callback: function(value) {
+              return value.toLocaleString('id-ID');
+            }
+          }
+        }
+      },
+      plugins: {
+        legend: {
+          display: false
+        }
+      }
+    }
+  });
+  </script>
+  <script>
+  const topProductValueCtx = document.getElementById("topProductValueChart").getContext("2d");
+  new Chart(topProductValueCtx, {
+    type: "bar",
+    data: {
+      labels: {{ top_product_value_labels|safe }},
+      datasets: [{
+        label: "Total Nilai (Rp)",
+        data: {{ top_product_value_data|safe }},
+        backgroundColor: "#facc15",
+        borderRadius: 8,
+        barThickness: 32
+      }]
+    },
+    options: {
+      responsive: true,
+      indexAxis: 'y',
+      scales: {
+        x: {
+          beginAtZero: true,
+          ticks: {
+            callback: function(value) {
+              return 'Rp ' + value.toLocaleString('id-ID');
+            }
+          }
+        }
+      },
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          callbacks: {
+            label: function(context) {
+              return 'Rp ' + context.parsed.x.toLocaleString('id-ID');
+            }
+          }
+        }
+      }
+    }
+  });
+  </script>
+{% endblock content %}
