@@ -15,7 +15,7 @@ class ProfileSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Profile
-        fields = ["user", "name", "phone_number"]
+        fields = ["user", "name"]
 
 
 class RegisterSerializer(serializers.ModelSerializer):
@@ -24,7 +24,7 @@ class RegisterSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ["email", "password", "name", "phone_number"]
+        fields = ["email", "password", "name"]
         extra_kwargs = {
             "password": {"write_only": True},
         }
@@ -36,7 +36,6 @@ class RegisterSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data) -> User:
         name = validated_data.pop("name")
-        phone_number = validated_data.pop("phone_number")
         email = validated_data.get("email")
 
         # Create user and use email as username
@@ -45,7 +44,7 @@ class RegisterSerializer(serializers.ModelSerializer):
         )
 
         # Create profile using BaseModel.actor as a link
-        Profile.objects.create(name=name, phone_number=phone_number, actor=user)
+        Profile.objects.create(name=name, actor=user)
 
         return user
 

@@ -1,6 +1,10 @@
-# Django starter app
+# Django Admin Starter Pack
 
-## Initial Features
+Launch tons of mobile apps, web apps, n8n workflows powered by Django.
+Everything is quickly set up using Django. A lot of things are worry free.
+Your AI copilots perform well too with much less context to do the executions.
+
+## Initial features
 
 - Initial standard features: auth, forgot password, edit profile.
 - Dashboard: including paginations and template-ready to append.
