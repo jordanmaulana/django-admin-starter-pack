@@ -45,7 +45,8 @@ http://localhost:8000/redoc/
 Create new apps
 
 ```bash
-./manage.py startapp product
+cd apps/
+../manage.py startapp product
 ```
 
 Run server
