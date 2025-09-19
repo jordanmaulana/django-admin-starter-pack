@@ -47,7 +47,5 @@ class DetailView(SuperuserRequiredMixin, DetailView):
     def post(self, request, id):
         profile = get_object_or_404(Profile, uid=id)
         profile.name = request.POST.get("name")
-        profile.phone_number = request.POST.get("phone_number")
-        profile.address = request.POST.get("address")
         profile.save()
         return redirect("user_list")

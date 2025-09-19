@@ -12,7 +12,7 @@ class ProfileAPITestCase(APITestCase):
             username="testuser", email="test@example.com", password="old_password"
         )
         self.profile = Profile.objects.create(
-            actor=self.user, name="Test User", phone_number="1234567890"
+            actor=self.user, name="Test User"
         )
         self.client.force_authenticate(user=self.user)
 

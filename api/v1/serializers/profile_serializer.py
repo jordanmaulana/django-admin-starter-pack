@@ -8,7 +8,7 @@ class ProfileSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Profile
-        fields = ["uid", "name", "phone_number", "address", "email"]
+        fields = ["uid", "name", "email"]
 
 
 class ChangePasswordSerializer(serializers.Serializer):

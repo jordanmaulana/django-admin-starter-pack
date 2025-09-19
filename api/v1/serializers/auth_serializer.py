@@ -20,7 +20,6 @@ class ProfileSerializer(serializers.ModelSerializer):
 
 class RegisterSerializer(serializers.ModelSerializer):
     name = serializers.CharField(write_only=True)
-    phone_number = serializers.CharField(write_only=True)
 
     class Meta:
         model = User

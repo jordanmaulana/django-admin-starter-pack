@@ -9,10 +9,14 @@ Your AI copilots perform well too with much less context to do the executions.
 - Initial standard features: auth, forgot password, edit profile.
 - Dashboard: including paginations and template-ready to append.
 
-## Todo
+## Todo - Project Setup
 
-- [ ] Change the `SECRET-KEY` in `core/settings.py`
-- [ ] Setup database config in `core/settings.py`
+### Environment Configuration
+- [ ] Copy `.env.example` to `.env` and configure all required variables:
+  - [ ] Set `SECRET_KEY` (generate a new one for production)
+  - [ ] Configure database credentials (`POSTGRES_DB`, `POSTGRES_USER`, `POSTGRES_PASSWORD`, `DB_HOST`, `DB_PORT`)
+  - [ ] Set email configuration (`EMAIL_HOST`, `EMAIL_PORT`, `EMAIL_HOST_USER`, `EMAIL_HOST_PASSWORD`)
+  - [ ] Configure `BACKEND_URL` for your domain
 
 ## How to setup
 
